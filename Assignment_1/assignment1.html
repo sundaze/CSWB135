@@ -160,8 +160,21 @@ Spring 2017
         }
 
     // write results to page
-    document.getElementById("results").innerHTML = "Your BMI is " + theBMI +
-                                                             " which means you are " + theCategory;
+    var message = "Your BMI is " + theBMI + " which means you are " + theCategory;
+    console.log(message);
+    // check to see if there is a child element to the div
+    var hasChild = document.getElementById('results').hasChildNodes();
+    if(!hasChild){
+        var newH2 = document.createElement('H2');       // creates the element node
+        var newClass = document.createAttribute('class');   // creates new attribute
+        newClass.value = "blue";        //set attribute value
+        newH2.setAttributeNode(newClass);
+        var txtNode = document.createTextNode(message);     // creates the text node
+        newH2.appendChild(txtNode);         // appends the text node to the element node
+        document.getElementById('results').appendChild(newH2);      //appends the element node to the element with corresponding id
+    }
+    
+    
 
    } // end if isValid
 
