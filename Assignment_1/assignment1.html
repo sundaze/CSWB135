@@ -1,11 +1,11 @@
-<!-- 
+<!--
 Neal Domingo
 CSWB 135
 Spring 2017
 
      this is based on the starter file for assignment 1
-     cswb135_starter_file_assignment_1.html 
-     
+     cswb135_starter_file_assignment_1.html
+
      Copyright Teresa Pelkie, 2017, Reproduction or Distribution on the Web is Prohibited
 -->
 
@@ -18,120 +18,130 @@ Spring 2017
 <title data-id="cswb135_starter_file_assignment_1">Assignment 1 CSWB 135</title>
 
 <style>
-    
+
  body {
       font-family: arial, sans-serif
-      font-size: 100%;      
- } 
-    
+      font-size: 100%;
+ }
+
   h1 {
       text-align: center;
   }
-  
+
   #calculator {
     width: 600px;
     margin: 0px auto;
     border: 2px solid #000;
     padding: 20px;
   }
-  
+
   #values {
     width: 600px;
     margin: 50px auto;
     padding: 20px;
   }
-  
+
   ul {
       margin-top: 5px;
     }
-    
+
     label, input {
         display: block;
-    }  
-    
+    }
+
     input {
         margin-bottom: 20px;
         margin-top: 5px;
     }
-    
+
     input[type=text] {
         float: left;
     }
-    
+
     label {
         clear: left;
     }
-    
+
     span {
         padding: 5px;
         font-size: 1.2em;
     }
-    
+
    .clearfix:after {
          visibility: hidden;
          display: block;
          content: " ";
          clear: left;
          height: 0;
-    }  
-    
+    }
+
     .error {
         color: red;
     }
-    
+
     .blue {
         color: blue;
-    }    
-  
- 
+    }
+
+
 </style>
 
 <script>
     window.onload = function() {
-        
-     // reference the button to be clicked   
+
+     // reference the button to be clicked
      var btnCalculate = document.getElementById("calculate");
-     
+
      // calls the function when the button is clicked
-       btnCalculate.onclick =calculateResult; 
-    
+       btnCalculate.onclick =calculateResult;
+
     }
+    
+    
 
      // code to be called when button is clicked goes here
     function calculateResult() {
-        
+
        // set test variable to determine when to compute and display results
        var isValid = true;
-        
+
        // variable to hold the BMI value
-       var theBMI = 0; 
-        
+       var theBMI = 0;
+
        // variable to hold the descriptive category
-       var theCategory = "";          
-            
-       // retrieve the value for weight 
-       var theWeight = document.getElementById('weight').value;  
-        
-       // retrieve the value for height    
-       var theHeight = document.getElementById('height').value;  
-    
-       // check the value for the weight
+       var theCategory = "";
+
+       // retrieve the value for weight
+       var theWeight = document.getElementById('weight').value;
+
+       // retrieve the value for height
+       var theHeight = document.getElementById('height').value;
+           
+ 
+       // check the value for the weight and height
        if (isNaN(theWeight) || theWeight <=0) {
-           alert("Enter a valid weight");
+           console.log("Enter a valid weight");
+           document.getElementsByClassName("error")[0].firstChild.nodeValue = "Enter a valid weight";
            isValid = false;
-       }  
-        
+       }else{
+           document.getElementsByClassName("error")[0].firstChild.nodeValue = " ";
+       }
+
        // check the value for the height
        if (isNaN(theHeight) || theHeight <=0) {
-           alert("Enter a valid height");
+           console.log("Enter a valid height");
+           // retrieve the class names for error message locations     
+           document.getElementsByClassName("error clearfix")[0].firstChild.nodeValue = "Enter a valid height";
            isValid = false;
-       } 
-        
-    
-     if (isValid) {    
-       // formula to calcluate BMI 
-      theBMI = ((theWeight / Math.pow(theHeight,2)) * 703).toFixed(2); 
-   
+       }else{
+           document.getElementsByClassName("error clearfix")[0].firstChild.nodeValue = " ";
+       }
+
+
+     if (isValid) {
+       // formula to calcluate BMI
+      theBMI = ((theWeight / Math.pow(theHeight,2)) * 703).toFixed(2);
+
         //nested if to determine the category
         if (theBMI >= 30){
           theCategory = "Obese";
@@ -146,39 +156,41 @@ Spring 2017
           theCategory = "Underweight";
         }
         else {
-            alert("There is a problem")
-        }     
-         
+            console.log("There is a problem");
+        }
+
     // write results to page
-    document.getElementById("results").innerHTML = "Your BMI is " + theBMI + 
-                                                             " which means you are " + theCategory;    
-    
+    document.getElementById("results").innerHTML = "Your BMI is " + theBMI +
+                                                             " which means you are " + theCategory;
+
    } // end if isValid
-        
+
  } // end calculateResult function
-        
     
+
+
+
 </script>
 
 
-	
+
 </head>
 
 <body>
-  
-  <header>
-    <h1>Body Mass Index (BMI) Calculator</h1>  
-  </header>
- 
 
- 
+  <header>
+    <h1>Body Mass Index (BMI) Calculator</h1>
+  </header>
+
+
+
   <section id="calculator">
-      
+
      <p>
        To determine if you're at a healthy weight, enter the following information
-       and calculate your Body Mass Index (BMI). 
-    </p>  
-      
+       and calculate your Body Mass Index (BMI).
+    </p>
+
       <form>
         <label for="weight" >Weight (lbs):</label>
         <input type="text" id="weight">
@@ -187,27 +199,27 @@ Spring 2017
         <label for="height" >Height (inches):</label>
         <input type="text" id="height">
         <span class="error clearfix"> </span>
-        
+
         <input type="button" id="calculate" value="Click to Calculate Your BMI">
-        <input type="reset" value="Clear the Form"> 
+        <input type="reset" value="Clear the Form">
       </form>
-      
+
 	  <div id="results"></div>
-      
+
   </section>
-  
-  
+
+
   <section id="values">
-     
+
     <h3>BMI values are as follows:</h3>
-    
+
     <ul>
       <li>Below 18: Underweight</li>
       <li>Between 18 and 24.9 : Normal</li>
       <li>Between 25 and 29.9 : Overweight</li>
       <li>Over 30 : Obese</li>
     </ul>
-    
+
   </section>
 
 </body>
