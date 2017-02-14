@@ -101,6 +101,12 @@ Spring 2017
 
      // code to be called when button is clicked goes here
     function calculateResult() {
+        
+       // clear previous childNode from 'results' div
+       var oldResults = document.getElementById('results');
+       while( oldResults.hasChildNodes() ){
+           oldResults.removeChild(oldResults.firstChild);
+       }
 
        // set test variable to determine when to compute and display results
        var isValid = true;
